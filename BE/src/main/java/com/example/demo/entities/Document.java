@@ -41,8 +41,13 @@ public class Document {
     @Column(name = "dimensione_byte", nullable = false)
     private long dimensioneByte;
 
+    /** columnDefinition = "text" perche' il testo di un documento supera i 255 caratteri di default. */
     @Column(name = "testo_estratto", columnDefinition = "text")
     private String testoEstratto;
+
+    /** Quanto ha impiegato l'OCR: utile per capire se conviene passare a un'elaborazione asincrona. */
+    @Column(name = "ocr_millis")
+    private Long ocrMillis;
 
     @CreationTimestamp
     @Column(name = "creato_il", nullable = false, updatable = false)

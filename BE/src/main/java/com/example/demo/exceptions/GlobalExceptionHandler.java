@@ -1,6 +1,7 @@
 package com.example.demo.exceptions;
 
 import com.example.demo.dto.ErrorResponseDTO;
+import com.example.demo.ocr.OcrException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorResponseDTO> handleUnreadableFile(IllegalStateException ex) {
         return build(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    /**
+     * 422 = "la richiesta era formalmente corretta, ma il contenuto non sono riuscito a
+     * elaborarlo". Non e' un 400 (l'utente non ha sbagliato la richiesta) ne' un 500
+     * (non e' un bug del server): il file semplicemente non era leggibile dall'OCR.
+     */
+    @ExceptionHandler(OcrException.class)
+    public ResponseEntity<ErrorResponseDTO> handleOcr(OcrException ex) {
+        return build(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
     }
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)

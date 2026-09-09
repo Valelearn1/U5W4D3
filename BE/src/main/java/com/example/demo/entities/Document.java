@@ -41,6 +41,9 @@ public class Document {
     @Column(name = "dimensione_byte", nullable = false)
     private long dimensioneByte;
 
+    @Column(name = "testo_estratto", columnDefinition = "text")
+    private String testoEstratto;
+
     @CreationTimestamp
     @Column(name = "creato_il", nullable = false, updatable = false)
     private Instant creatoIl;

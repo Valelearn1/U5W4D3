@@ -53,6 +53,17 @@
 			<artifactId>tess4j</artifactId>
 			<version>5.16.0</version>
 		</dependency>
+		<!--
+			Arriva gia' come dipendenza transitiva di tess4j, ma la dichiariamo esplicitamente
+			perche' la usiamo direttamente nel nostro codice (TesseractTextExtractor renderizza
+			le pagine PDF con PDFRenderer). Cosi' un aggiornamento di tess4j non puo' cambiarci
+			la versione sotto i piedi senza che ce ne accorgiamo.
+		-->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

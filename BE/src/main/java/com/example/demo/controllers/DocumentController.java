@@ -30,7 +30,7 @@ public class DocumentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DocumentResponseDTO archivia(@RequestParam("file") MultipartFile file,
-                                     @RequestParam("titolo") String titolo) {
+                                        @RequestParam(value = "titolo", required = false) String titolo) {
         return DocumentResponseDTO.from(service.archivia(file, titolo));
     }
 
